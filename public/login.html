@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Casca do Sistema</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <form>
+        <label for="txt-usuario">Login:</label>
+        <input id="txt-usuario" autofocus />
+        <label for="txt-senha">Senha:</label>
+        <input type="password" id="txt-senha" />
+        <button type="submit">Logar</button>
+        <p id="message"></p>
+    </form>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        ipcRenderer.on('login:failure', () => {
+            const p = document.getElementById('message');
+            p.innerHTML = 'Usuário ou senha incorretos!';
+        });
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const user = document.getElementById('txt-usuario').value;
+            const password = document.getElementById('txt-senha').value;
+            
+            ipcRenderer.send('form:login', {
+                user,
+                password
+            });
+        });
+    </script>
+</body>
+</html>

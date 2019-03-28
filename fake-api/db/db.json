@@ -1,0 +1,15 @@
+{
+  "usuario": [
+    {
+      "id": 1,
+      "nome": "Luiz",
+      "username": "luiz",
+      "password": "senha",
+      "appName": "money-flow",
+      "repositoryURL": "https://github.com/psychomantis22/money-flow",
+      "commitSHA": "ae611ebfeb0024b7f944720904fec27602b19684",
+      "indexFile": "money-flow-ui-vue/dist/index.html",
+      "injectedConfigurations": {}
+    }
+  ]
+}

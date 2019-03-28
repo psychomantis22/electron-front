@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Baixando app</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(153, 171, 223);
+            line-height: 100%;
+            text-align: center;
+            height: 100%;
+        }
+        body div {
+            margin: auto;
+            width: 200px;
+            height: 40px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="message">Efetuando download da aplicação, aguarde...</div>
+
+    <script>
+        const electron = require('electron')
+        const { app, ipcRenderer } = electron;
+
+        function downloadapp()
+        {
+            ipcRenderer.send('app:download');
+        }
+
+        setTimeout(downloadapp, 2000);
+
+        function closeapp() {
+            ipcRenderer.send('app:close');
+        }
+
+        ipcRenderer.on('app:error', () => {
+            document.getElementById('message').innerHTML = "Erro ao efetuar o download da aplicação";
+            setTimeout(closeapp, 2000);
+        });
+    </script>
+</body>
+</html>
